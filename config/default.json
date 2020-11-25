@@ -1,0 +1,14 @@
+{
+"Application": {
+    "envConfig":{
+        "port":"5600",
+        "baseUrl":"/sample-app",
+        "logging":{
+            "directory" : "logs/",
+            "filename" : "sample-app.log",
+            "datePattern":"YYYY-MM-DD",
+            "level" : "debug"
+        }
+    }
+}
+}

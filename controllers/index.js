@@ -1,0 +1,11 @@
+'use strict()';
+var express = require ('express');
+var router = express.Router();
+var config = require('config');
+
+const baseUrl = config.get('Application.envConfig.baseUrl');
+
+//Configuring the express route to the controller for gateway
+router.use(baseUrl + '/', require('./userController'));
+
+module.exports = router;
