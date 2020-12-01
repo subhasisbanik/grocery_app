@@ -8,4 +8,7 @@ const baseUrl = config.get('Application.envConfig.baseUrl');
 //Configuring the express route to the controller for gateway
 router.use(baseUrl + '/', require('./userController'));
 
+//Configuring the express route to the controller for status
+router.use(baseUrl + '/', require('./statusController'));
+
 module.exports = router;

@@ -8,6 +8,30 @@
             "filename" : "sample-app.log",
             "datePattern":"YYYY-MM-DD",
             "level" : "debug"
+        },
+        "Eureka":{
+            "client":{
+                "app": "sample-app",
+              "hostName": "localhost",
+              "ipAddr": "127.0.0.1",
+              "port":{
+                  "$": "5600",
+                  "@enabled": "true"
+              },      
+              "statusPageUrl": "http://localhost:5600/sample-app/status",
+              "vipAddress": "sample-app",
+              "dataCenterInfo": {
+                "name": "MyOwn",
+                "@class":"com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo"
+              },
+              "registerWithEureka": true,
+              "fetchRegistry": true
+            },
+            "server":{
+                "host": "localhost",
+              "port": "8761",
+              "servicePath": "/eureka/apps"
+            }
         }
     }
 }

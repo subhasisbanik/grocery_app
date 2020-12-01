@@ -3,10 +3,11 @@ var express = require('express');
 var cors = require('cors');
 var http = require('http');
 var bodyParser = require('body-parser');
-var config = require('config');
+const config = require('config');
 var helmet = require('helmet');
 var logger = require('./adapter/loggingAdapter');
-
+var EurekaHelper = require('./helpers/eurekaHelper');
+//var eurekaHelper = new EurekaHelper();
 var app = express();
 
 app.use(helmet());
@@ -41,5 +42,21 @@ logger.initLog();
 //Start the HTTP server
 http.createServer(app).listen(app.get('port'), async function(){
     logger.info("HTTP Server running on port: " + app.get('port'));
-    logger.debug("-----------------------------------------------");
-})
+    logger.info("-----------------------------------------------");    
+    logger.info("Trying to start Eureka client");
+    EurekaHelper.startClient();
+});
+
+process.on('exit', function() {
+    logger.info("Caught exit signal");
+    logger.info("Trying to stop Eureka client");
+    EurekaHelper.stopClient();
+    process.exit();
+  });
+
+process.on('SIGINT', function() {
+    logger.info("Caught interrupt signal");
+    logger.info("Trying to stop Eureka client");
+    EurekaHelper.stopClient();
+    process.exit();
+});
