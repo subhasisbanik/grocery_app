@@ -2,7 +2,7 @@
 "Application": {
     "envConfig":{
         "port":"5600",
-        "baseUrl":"/sample-app",
+        "baseUrl":"/node-service",
         "logging":{
             "directory" : "logs/",
             "filename" : "sample-app.log",
@@ -11,15 +11,15 @@
         },
         "Eureka":{
             "client":{
-                "app": "sample-app",
+                "app": "node-service",
               "hostName": "localhost",
               "ipAddr": "127.0.0.1",
               "port":{
                   "$": "5600",
                   "@enabled": "true"
               },      
-              "statusPageUrl": "http://localhost:5600/sample-app/status",
-              "vipAddress": "sample-app",
+              "statusPageUrl": "http://localhost:5600/node-service/status",
+              "vipAddress": "node-service",
               "dataCenterInfo": {
                 "name": "MyOwn",
                 "@class":"com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo"
