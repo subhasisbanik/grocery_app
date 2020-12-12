@@ -1,9 +1,8 @@
 'use strict()';
 const config = require('config');
 const fs = require('fs');
-require('winston-daily-rotate-file');
-const { createLogger, format, transports } = require('winston');
-const { combine, timestamp, printf } = format;
+const winston = require('winston');
+const winstonDailyLogger = require('winston-daily-rotate-file');
 
 class LogUtility{
     get logger(){
@@ -12,33 +11,25 @@ class LogUtility{
     set logger(logger){
         this.logger = logger;
     }
-    //TODO: change the label based on class
-    
-    static initLog(label){
+    static initLog(){
         const logDirectory = config.get('Application.envConfig.logging.directory');
         if(!fs.existsSync(logDirectory)){
             fs.mkdirSync(logDirectory);
         }
-        const myFormat = printf(({ level, message, timestamp }) => {
-            return `${timestamp} [${label}] ${level}: ${message}`;
-          });
+        const tsFormat = ()=>(new Date()).toLocaleTimeString();
         const logFileName = logDirectory + config.get('Application.envConfig.logging.filename');
-        let transport = new transports.DailyRotateFile({
+        let transport = new(winstonDailyLogger)({
             filename : logFileName,
-            format: combine(timestamp(), myFormat),
-            zippedArchive: true,
-            maxSize: '20m',
-            maxFiles: '14d'
+            timestamp : tsFormat,
+            datePattern : config.get('Application.envConfig.logging.datePattern'),
+            handleExceptions: true,
+            prepend : true,
+            json : true,
+            colorize : true
         });
-        console.log(process.env.ENV);
-        this._logger = createLogger({
+        this._logger = winston.createLogger({
             level : process.env.ENV === config.get('Application.envConfig.logging.level'),
-            transports : [ transport, 
-                new transports.Console({
-                    level: config.get('Application.envConfig.logging.level'),
-                    format: format.combine(format.colorize(), timestamp(), myFormat)
-                  })
-                 ]
+            transport : [transport]
         });
     }
     

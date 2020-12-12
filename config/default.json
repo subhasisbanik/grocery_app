@@ -5,7 +5,7 @@
         "baseUrl":"/node-service",
         "logging":{
             "directory" : "logs/",
-            "filename" : "sample-app.log",
+            "filename" : "node-service.log",
             "datePattern":"YYYY-MM-DD",
             "level" : "debug"
         },
@@ -32,6 +32,11 @@
               "port": "8761",
               "servicePath": "/eureka/apps"
             }
+        },
+        "jwt":{
+          "privateKey":"E:/Interview/jwt-keypair/private.key",
+          "publicKey":"E:/Interview/jwt-keypair/public.key",
+          "tokenExpiry":300
         }
     }
 }
