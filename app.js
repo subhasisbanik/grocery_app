@@ -7,7 +7,6 @@ const config = require('config');
 var helmet = require('helmet');
 var logger = require('./adapter/loggingAdapter');
 //var EurekaHelper = require('./helpers/eurekaHelper');
-const jwt = require("jsonwebtoken");
 var app = express();
 
 app.use(helmet());
@@ -19,18 +18,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 var parseJson = bodyParser.json();
 app.use(function(req,res,next){
     let contentType = req.headers['content-type'];
-    // let authHeader = req.headers['authorization'];
-    // let token = authHeader && authHeader.split(' ')[1];
-    // if (token == null) return res.sendStatus(401) // if there isn't any token
-
-    // jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    //     console.log(err)
-    //     if (err) return res.sendStatus(403)
-    //     req.user = user
-    //     //next() // pass the execution off to whatever request the client intended
-    //     parseJson(req,res,next);
-    //   })
-
     if(undefined != contentType && contentType.includes('multipart/form-data')){
         next();
     }else{
@@ -46,7 +33,6 @@ app.use(cors());
 
 //controller registration
 app.use(require('./controllers'));
-
 
 //intializing winston logger for app.js
 logger.initLog("app.js");

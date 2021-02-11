@@ -37,6 +37,9 @@
           "privateKey":"E:/Interview/jwt-keypair/private.key",
           "publicKey":"E:/Interview/jwt-keypair/public.key",
           "tokenExpiry":300
+        },
+        "mongodb":{
+          "SRV":"mongodb+srv://m001-student:QvPDuMtFDi2Bpdjw@sandbox.7vgd5.mongodb.net/test?authSource=admin&replicaSet=atlas-m9sy4y-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true"
         }
     }
 }

@@ -22,6 +22,7 @@
     "helmet": "^4.2.0",
     "http": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.8",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
   }
